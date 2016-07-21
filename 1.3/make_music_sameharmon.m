@@ -3,6 +3,7 @@ function music = make_music_sameharmon(f_sample, tones, beat, rising)
 
     beats_time = 0.5;
     
+    % Find fre of tone
     fre = [349.23,392,440,466.16,523.25,587.33,659.25];
     tone2fre = zeros(1,length(tones));
     for i=1:length(tones)
@@ -14,6 +15,7 @@ function music = make_music_sameharmon(f_sample, tones, beat, rising)
     
     t_start = 0;
     
+    % make music
     for i=1:length(tone2fre)
         music = refine_guitar_toneshape(standard_time, t_start, beats_time*beat(i), tone2fre(i) ,music, ...
             [1.4572 0.9587 1.0999 0 0]);

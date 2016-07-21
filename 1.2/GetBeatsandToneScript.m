@@ -1,11 +1,13 @@
 clear all;close all;
 
+% Parameters
 f_sample = 8e3;
 divede = 150;
 diff_t = 1.35;
 min_len = 0.15;
 permit_error = 0.05;
 
+% Music Signal
 fmt = audioread('fmt.wav');
 lengthNum = ceil(size(fmt,1)/divede);
 fmt_resize = [fmt; zeros(lengthNum * divede-size(fmt,1),1)];
@@ -22,6 +24,7 @@ hold on;
 plot(max_sample.position,max_sample.value,'r-o');
 hold off;
 
+% Divide to small divisions
 n = 0;
 for i=6:lengthNum
     temp = max_sample.value(i)/mean(max_sample.value(i-5:i-1));
@@ -32,6 +35,7 @@ for i=6:lengthNum
     end
 end
 
+% Get the beats point
 j = 2;
 while(j<length(result_pos))
     if(result_pos(j+1)-result_pos(j) < min_len * f_sample);
@@ -55,6 +59,7 @@ for i=1:length(result_pos)
 end
 hold off;
 
+% Ananlyze the frequency
 for i=1:length(result_pos)
     if i==length(result_pos)
         aimwav = fmt(result_pos(i):length(fmt));
@@ -77,9 +82,19 @@ for i=1:length(result_pos)
     harmonicfre(i) = {tempharmonicfre};
 end
 
+% Get the beats
 for i=1:length(result_pos)-1
     beat(i) = round((result_pos(i+1)-result_pos(i))/(0.5 * 0.5 * f_sample));
 end
 beat(length(result_pos)) = round((length(fmt)-result_pos(length(result_pos)))/(0.5 * 0.5 * f_sample));
 beat = beat /2;
 save tone_base_harmonic.mat tone basefre harmonicfre;
+
+% Save file
+ fid = fopen('data.txt','wt');
+ for i=1:length(result_pos)-1
+    fprintf(fid,'%s\t%g\t',tone{i}, basefre(i));
+    fprintf(fid,'%g\t',harmonicfre{i});
+    fprintf(fid,'\n');
+ end
+ fclose(fid); 

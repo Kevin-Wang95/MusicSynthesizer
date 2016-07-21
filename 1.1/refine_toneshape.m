@@ -32,12 +32,17 @@ function signal_AP = refine_toneshape(t, t_start, duration, tonefre ,signal)
     signal_AP(decay)=linspace(peak_level, stay_level, sum(decay));
     signal_AP(dissolve)=stay_level*exp(dissolve_level * (stay_end - t_local(dissolve)) / duration);
     
-    % Get wave (contain f 2f 3f)
+%     plot(1:length(signal_AP),signal_AP);
+%     set(gca,'XLim',[0 10000]);
+%     set(gca,'YLim',[0 1.2]);
+    
+    % Add Harmonic and Get wave (contain f 2f 3f)
     temp = 0;
     for i = 1:length(harmonic)
         temp = temp + sin(2 * (i + 1) * pi * tonefre * t) * harmonic(i);
     end
     temp = temp + sin(2 * pi * tonefre * t);
     signal_AP = signal_AP .* temp + signal;
+    plot(1:length(signal_AP),signal_AP);
 end
 
