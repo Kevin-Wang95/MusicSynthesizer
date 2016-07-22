@@ -1,4 +1,4 @@
-function signal_AP = refine_toneshape(t, t_start, duration, tonefre ,signal)
+function signal_AP = make_toneshape(t, t_start, duration, tonefre ,signal)
     if nargin ==5
         harmonic = [0.2 0.3 0.2 0.15 0.2 0.25 0.2];
     end

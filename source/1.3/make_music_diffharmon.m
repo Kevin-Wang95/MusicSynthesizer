@@ -33,7 +33,7 @@ function music = make_music_diffharmon(f_sample, tones, beat, rising, major)
     
     for i=1:length(tone2fre)
         [~, temp_pos] = min(abs(basefre-tone2fre(i)));
-        music = refine_guitar_toneshape(standard_time, t_start, beats_time*beat(i), tone2fre(i) ,music, ...
+        music = make_guitar_toneshape(standard_time, t_start, beats_time*beat(i), tone2fre(i) ,music, ...
             harmonicfre{temp_pos});
         t_start = t_start + beats_time*beat(i);
     end

@@ -1,4 +1,4 @@
-function signal_AP = refine_guitar_toneshape(t, t_start, duration, tonefre ,signal, harmonic)
+function signal_AP = make_guitar_toneshape(t, t_start, duration, tonefre ,signal, harmonic)
     if nargin ==5
         harmonic = [0.2 0.3 0.2 0.15];
     end

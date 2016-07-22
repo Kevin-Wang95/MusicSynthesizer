@@ -17,7 +17,7 @@ function music = make_music_sameharmon(f_sample, tones, beat, rising)
     
     % make music
     for i=1:length(tone2fre)
-        music = refine_guitar_toneshape(standard_time, t_start, beats_time*beat(i), tone2fre(i) ,music, ...
+        music = make_guitar_toneshape(standard_time, t_start, beats_time*beat(i), tone2fre(i) ,music, ...
             [1.4572 0.9587 1.0999 0 0]);
         t_start = t_start + beats_time*beat(i);
     end

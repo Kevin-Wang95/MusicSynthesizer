@@ -93,7 +93,7 @@ save tone_base_harmonic.mat tone basefre harmonicfre;
 % Save file
  fid = fopen('data.txt','wt');
  for i=1:length(result_pos)-1
-    fprintf(fid,'%s\t%g\t',tone{i}, basefre(i));
+    fprintf(fid,'%s\t%g\t%g\t',tone{i}, basefre(i), beat(i));
     fprintf(fid,'%g\t',harmonicfre{i});
     fprintf(fid,'\n');
  end
